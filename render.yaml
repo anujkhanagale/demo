@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: custom-clans
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    disk:
+      name: custom-clans-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIRECTORY
+        value: /opt/render/project/src/data
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_PAYMENT_REVIEW_KEY
+        generateValue: true
+      - key: PAYMENT_UPI_ID
+        sync: false
